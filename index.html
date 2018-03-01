@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Memory Game</title>
+        <link href="styles.css" rel="stylesheet" />
+        <script src="https://unpkg.com/vue"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.4/vue.js"></script>
+        <script src="https://unpkg.com/v-animate-css/dist/v-animate-css.js"></script>
+
+    </head>
+    <body>
+        <h1 id="head">Memory Game</h1>
+        
+        <div id="vue-game">
+            <h1>{{ message }}</h1>
+            <button v-bind:style="{background:buttonColor1}" id="b1" v-on:click="answer(1)">1</button>
+            <button v-bind:style="{background:buttonColor2}" id="b2" v-on:click="answer(2)">2</button>
+            <button v-bind:style="{background:buttonColor3}" id="b3" v-on:click="answer(3)">3</button>
+        </div>
+        
+        <script src="app.js"></script>
+    </body>
+</html>
