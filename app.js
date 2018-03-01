@@ -19,16 +19,18 @@ var app = new Vue({
     created: function() {
         this.message = 'test';
         this.createArray();
-                this.blink(0);
+        /*this.blink(0);
         this.blink(0);
         this.blink(1);
         this.blink(1);
         this.blink(0);
         this.blink(0);
         this.blink(0);
-        this.blink(0);
+        this.blink(0);*/
         
-        
+		for (i = 0; i < this.arraySize; i++) {
+			setTimeout(function() { this.blink(this.randomArray[i]); console.log(i); }, i*2000);
+		}
         setTimeout(function(){ 
             console.log("test10");
             this.message = 'Remember the sequence!';
@@ -74,24 +76,24 @@ var app = new Vue({
             console.log(this.randomArray);
         },
             
-        blink: function() {
-            console.log('blink called for ' + arguments[0]);
-            if(arguments[0] == 0){
+        blink: function(numberButton) {
+            console.log("I tried to blink " + numberButton);
+			if(numberButton == 0){
                 console.log("1111");
                 this.buttonColor1 = this.colorOne;
                 setTimeout(function(){ 
                     this.buttonColor1 = this.colorTwo;
                 }, 2000);
             }
-            
-            else if(arguments[0] == 1){
+             
+            else if(numberButton == 1){
                 this.buttonColor2 = this.colorOne;
                 setTimeout(function(){ 
                     this.buttonColor2 = this.colorTwo;
                 }, 2000);
             }
             
-            else if(arguments[0] == 2){
+            else if(numberButton == 2){
                 this.buttonColor3 = this.colorOne;
                 setTimeout(function(){ 
                     this.buttonColor3 = this.colorTwo;
