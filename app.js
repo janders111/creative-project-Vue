@@ -11,31 +11,18 @@ var app = new Vue({
         message: 'Welcome! Begin game',
         colorOne: 'white',
         colorTwo: 'black',
-        buttonColor1: 'white',
-        buttonColor2: 'white',
-        buttonColor3: 'white'
+        buttonColor: ['white', 'white', 'white']
     },
     
     created: function() {
         this.message = 'test';
         this.createArray();
-        /*this.blink(0);
-        this.blink(0);
-        this.blink(1);
-        this.blink(1);
-        this.blink(0);
-        this.blink(0);
-        this.blink(0);
-        this.blink(0);*/
         
-		for (i = 0; i < this.arraySize; i++) {
-			setTimeout(function() { this.blink(this.randomArray[i]); console.log(i); }, i*2000);
-		}
-        setTimeout(function(){ 
+        /*setTimeout(function(){ 
             console.log("test10");
             this.message = 'Remember the sequence!';
             console.log(this.message);
-        }, 2000);
+        }, 2000);*/
         
         /*
                     this.message = 'Remember the sequence!';
@@ -75,10 +62,30 @@ var app = new Vue({
             }
             console.log(this.randomArray);
         },
-            
-        blink: function(numberButton) {
+
+		start: function() {
+			this.blinkSequence(0);
+
+		},
+
+		blinkSequence: function(i) {
+			console.log(i);
+			if (i == this.randomArray.length) {
+				console.log(i + " was where I stopped");
+				return;
+			}
+			var self = this;
+			this.blink(self.randomArray[i], self);
+			setTimeout(function() { console.log(self.randomArray); self.blinkSequence(i+1)  }, 2000);
+		},
+
+        blink: function(numberButton, self) {
             console.log("I tried to blink " + numberButton);
-			if(numberButton == 0){
+			self.buttonColor[numberButton - 1] = self.colorOne;
+			setTimeout(function () {
+				self.buttonColor[numberButton - 1] = self.colorTwo;
+			}, 1500);
+			/*if(numberButton == 0){
                 console.log("1111");
                 this.buttonColor1 = this.colorOne;
                 setTimeout(function(){ 
@@ -98,7 +105,7 @@ var app = new Vue({
                 setTimeout(function(){ 
                     this.buttonColor3 = this.colorTwo;
                 }, 2000);
-            }
+            }*/
             
         },
         

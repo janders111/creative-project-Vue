@@ -13,10 +13,11 @@
         <h1 id="head">Memory Game</h1>
         
         <div id="vue-game">
-            <h1>{{ message }}</h1>
-            <button v-bind:style="{background:buttonColor1}" id="b1" v-on:click="answer(1)">1</button>
-            <button v-bind:style="{background:buttonColor2}" id="b2" v-on:click="answer(2)">2</button>
-            <button v-bind:style="{background:buttonColor3}" id="b3" v-on:click="answer(3)">3</button>
+			<button v-on:click="start()">start game</button>
+			<h1>{{ message }}</h1>
+            <button v-bind:style="{background:buttonColor[0]}" id="b1" v-on:click="answer(1)">1</button>
+            <button v-bind:style="{background:buttonColor[1]}" id="b2" v-on:click="answer(2)">2</button>
+            <button v-bind:style="{background:buttonColor[2]}" id="b3" v-on:click="answer(3)">3</button>
         </div>
         
         <script src="app.js"></script>
