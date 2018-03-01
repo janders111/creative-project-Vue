@@ -9,9 +9,11 @@ var app = new Vue({
         answers: [],
         answerIter: 0,
         message: 'Welcome! Begin game',
-        colorOne: 'white',
-        colorTwo: 'black',
-        buttonColor: ['white', 'white', 'white']
+        colorOne: 'pink',
+        colorTwo: 'white',
+        buttonColor1: 'white',
+        buttonColor2: 'white',
+        buttonColor3: 'white'
     },
     
     created: function() {
@@ -75,37 +77,37 @@ var app = new Vue({
 				return;
 			}
 			var self = this;
-			this.blink(self.randomArray[i], self);
+			this.blink(self.randomArray[i]);
 			setTimeout(function() { console.log(self.randomArray); self.blinkSequence(i+1)  }, 2000);
 		},
 
-        blink: function(numberButton, self) {
-            console.log("I tried to blink " + numberButton);
-			self.buttonColor[numberButton - 1] = self.colorOne;
-			setTimeout(function () {
-				self.buttonColor[numberButton - 1] = self.colorTwo;
-			}, 1500);
-			/*if(numberButton == 0){
-                console.log("1111");
+        blink: function(numberButton) {
+            console.log("I tried to blink button" + numberButton);
+            var blinkDelay = 500;
+            
+            if(numberButton == 0){
                 this.buttonColor1 = this.colorOne;
+                var self = this;
                 setTimeout(function(){ 
-                    this.buttonColor1 = this.colorTwo;
-                }, 2000);
+                    self.buttonColor1 = self.colorTwo;
+                }, blinkDelay);
             }
              
             else if(numberButton == 1){
                 this.buttonColor2 = this.colorOne;
+                var self = this;
                 setTimeout(function(){ 
-                    this.buttonColor2 = this.colorTwo;
-                }, 2000);
+                    self.buttonColor2 = self.colorTwo;
+                }, blinkDelay);
             }
             
             else if(numberButton == 2){
                 this.buttonColor3 = this.colorOne;
+                var self = this;
                 setTimeout(function(){ 
-                    this.buttonColor3 = this.colorTwo;
-                }, 2000);
-            }*/
+                    self.buttonColor3 = self.colorTwo;
+                }, blinkDelay);
+            }
             
         },
         
