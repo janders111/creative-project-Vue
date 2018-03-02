@@ -1,64 +1,37 @@
 Vue.use(VAnimateCss.default);
 
+/* TODO
+ * -start game turn to blank when game started
+ * -button changes to "next round" when round completed
+ * -keep track of score and display it
+ * -deactivate game once completed
+ * -be able to restart game with start game
+ */
 
 var app = new Vue({
     el:'#vue-game',
     data: {
         randomArray: [],
-        arraySize: 5,
         answers: [],
-        answerIter: 0,
-        message: 'Welcome! Begin game',
-        colorOne: 'pink',
-        colorTwo: 'white',
-        buttonColor1: 'white',
-        buttonColor2: 'white',
-        buttonColor3: 'white'
+		score: 1,
+        message: 'Round: 1',
+		game_status: "start game",
+		fin: '',
+        colorTwo: ['#AA0000', '#00AA00', '#0000AA'],
+		colorOne: ['#FF0000', '#00FF00', '#0000FF'],
+        buttonColor1: '#AA0000',
+        buttonColor2: '#00AA00',
+        buttonColor3: '#0000AA'
     },
     
     created: function() {
-        this.message = 'test';
         this.createArray();
-        
-        /*setTimeout(function(){ 
-            console.log("test10");
-            this.message = 'Remember the sequence!';
-            console.log(this.message);
-        }, 2000);*/
-        
-        /*
-                    this.message = 'Remember the sequence!';
-            for(i = 0; i < this.answerIter; i++) {
-                var current = this.randomArray[this.answerIter];
-                console.log(current);
-                this.blink(0);
-                this.blink(1);
-            }
-            this.message = 'repeat what you just saw';
-            
-            
-            window.setInterval(() => {
-            console.log(this.answerIter);
-            for(i = 0; i < this.answerIter; i++) {
-                var identifier = '#b' + this.randomArray[this.answerIter].toString();
-                console.log(identifier);
-                //$('head').fadeToggle(1000);
-            }
-            this.message = 'repeat what you just saw';
-        },3000);
-*/
-            //when answerArray.size = answerIter, check if it is the same
-
-            //if it is the same, repeat last two lines while 
-            //answerarray.size < array size
-
-            //else, cout you win! 
     },
     
     methods: {
         createArray: function() {
-            var i = 0;
-            for(i = 0; i < this.arraySize; i++) {
+            this.randomArray = [];
+            for(i = 0; i < this.score + 4; i++) {
                 this.randomArray[i] = (Math.floor(Math.random() * 3));
                 console.log('random num generated');
             }
@@ -66,8 +39,13 @@ var app = new Vue({
         },
 
 		start: function() {
-			this.blinkSequence(0);
-
+			if (this.game_status == "start game" || this.game_status == "next round") {
+				this.game_status = "";
+				this.blinkSequence(0);
+				this.fin = '';
+				self = this;
+				setTimeout(function() { self.game_status = "select choice"; self.answers = [] }, 2000 * self.randomArray.length)
+			}
 		},
 
 		blinkSequence: function(i) {
@@ -86,35 +64,57 @@ var app = new Vue({
             var blinkDelay = 500;
             
             if(numberButton == 0){
-                this.buttonColor1 = this.colorOne;
+                this.buttonColor1 = this.colorOne[numberButton];
                 var self = this;
                 setTimeout(function(){ 
-                    self.buttonColor1 = self.colorTwo;
+                    self.buttonColor1 = self.colorTwo[numberButton];
                 }, blinkDelay);
             }
              
             else if(numberButton == 1){
-                this.buttonColor2 = this.colorOne;
+                this.buttonColor2 = this.colorOne[numberButton];
                 var self = this;
                 setTimeout(function(){ 
-                    self.buttonColor2 = self.colorTwo;
+                    self.buttonColor2 = self.colorTwo[numberButton];
                 }, blinkDelay);
             }
             
             else if(numberButton == 2){
-                this.buttonColor3 = this.colorOne;
+                this.buttonColor3 = this.colorOne[numberButton];
                 var self = this;
                 setTimeout(function(){ 
-                    self.buttonColor3 = self.colorTwo;
+                    self.buttonColor3 = self.colorTwo[numberButton];
                 }, blinkDelay);
             }
             
         },
         
-        answer: function() {
-            this.answers[this.answerIter] = arguments[0] - 1;
-            this.answerIter++;
+        answer: function(answer) {
+            this.answers.push(answer - 1);
             console.log('answer array after calling answer(): ' + this.answers);
-        }
+			var answerCorrect = true;
+			if (this.answers.length == this.randomArray.length && this.game_status != "" && this.game_status != "start game") {
+				console.log("check answer");
+				for (i = 0; i < this.answers.length; i++) {
+					console.log("random: " + this.randomArray[i] + ", guess: " + this.answers[i] + ". " + (this.randomArray[i] == this.answers[i]));
+					if (this.randomArray[i] != this.answers[i]) {
+						answerCorrect = false;
+					}
+				}
+				if (answerCorrect) {
+					console.log("sequences match!");
+					this.score++;
+					this.createArray();
+					this.game_status = "next round";
+					this.message = "Round: " + this.score;
+				} else {
+					this.fin = "Your score was: " + this.score + '. Click "start game" to play again!';
+					this.game_status = "start game";
+					this.score = 1;
+					this.createArray();
+					this.message = "Round: " + this.score;
+				}
+			}
+		}
     }
 });
