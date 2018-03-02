@@ -1,5 +1,56 @@
 button {
-	width: 100px;
-	height: 100px;	
+    font-weight: bold;
+    background-color: #555555; /* Green */
+    border: none;
+    color: white;
+    border-radius: 17px;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 3px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
 }
 
+img {
+    border-radius: 50px;
+}
+
+#mainBody {
+    text-align: center;
+    margin: auto;
+    font-family: 'Cinzel', serif;
+    width: 50%;
+    border: 3px solid whtie;
+    padding: 10px;
+}
+
+body {
+    background-image: url('geometric_wallpaper.jpg');
+    background-size: cover;
+    background-repeat: repeat-y; 
+}
+
+#brainman{
+    width: 33%;
+    border: 3px solid white;
+}
+
+footer{
+    font-family: 'Arimo', sans-serif;
+    text-align: left;
+    font-size: 12px;
+    text-decoration: none;
+    background-color: #dddddd;
+    color: #444444;
+    position: relative;
+    z-index: 20;
+    height: 60px;
+    position: fixed; 
+    bottom: 0;
+    padding: 0px 10px 0px 10px;
+}

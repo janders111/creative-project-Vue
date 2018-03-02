@@ -17,11 +17,11 @@ var app = new Vue({
         message: 'Round: 1',
 		game_status: "start game",
 		fin: '',
-        colorTwo: ['#AA0000', '#00AA00', '#0000AA'],
-		colorOne: ['#FF0000', '#00FF00', '#0000FF'],
-        buttonColor1: '#AA0000',
-        buttonColor2: '#00AA00',
-        buttonColor3: '#0000AA'
+        colorTwo: ['#C98839', '#AC6C82', '#6384B0'],
+		colorOne: ['#DEDDDC', '#DEDDDC', '#DEDDDC'],
+        buttonColor1: '#C98839',
+        buttonColor2: '#AC6C82',
+        buttonColor3: '#6384B0'
     },
     
     created: function() {
@@ -44,7 +44,7 @@ var app = new Vue({
 				this.blinkSequence(0);
 				this.fin = '';
 				self = this;
-				setTimeout(function() { self.game_status = "select choice"; self.answers = [] }, 2000 * self.randomArray.length)
+				setTimeout(function() { self.game_status = "select choice"; self.answers = [] }, 780 * self.randomArray.length)
 			}
 		},
 
@@ -56,7 +56,7 @@ var app = new Vue({
 			}
 			var self = this;
 			this.blink(self.randomArray[i]);
-			setTimeout(function() { console.log(self.randomArray); self.blinkSequence(i+1)  }, 2000);
+			setTimeout(function() { console.log(self.randomArray); self.blinkSequence(i+1)  }, 850);
 		},
 
         blink: function(numberButton) {

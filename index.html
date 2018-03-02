@@ -2,24 +2,37 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Memory Game</title>
+        <title>déjà vue</title>
         <link href="styles.css" rel="stylesheet" />
         <script src="https://unpkg.com/vue"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.4/vue.js"></script>
         <script src="https://unpkg.com/v-animate-css/dist/v-animate-css.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+        <script src="https://unpkg.com/v-animate-css/dist/v-animate-css.js"></script>
 
     </head>
+    
     <body>
-        <h1 id="head">Memory Game</h1>
+        <div id="mainBody">
+            <h1 id="head">déjà vue</h1>
+            <h3>A simple memory training game!</h3>
+
+            <img src="brain1.jpg" alt="brain man" id="brainman">
+
+            <div id="vue-game">
+                <button style="width: 200px; height:50px" v-animate-css.click="'tada'"  v-on:click="start()">{{ game_status }}</button>
+                <h1>{{ message }}</h1>
+                <button v-bind:style="{background:buttonColor1}" id="b1" v-on:click="answer(1); blink(0)">1</button>
+                <button v-bind:style="{background:buttonColor2}" id="b2" v-on:click="answer(2); blink(1)">2</button>
+                <button v-bind:style="{background:buttonColor3}" id="b3" v-on:click="answer(3); blink(2)">3</button>
+                <h3>{{ fin }}</h3>
+            </div>
+        </div>
         
-        <div id="vue-game">
-			<button v-on:click="start()">{{ game_status }}</button>
-			<h1>{{ message }}</h1>
-            <button v-bind:style="{background:buttonColor1}" id="b1" v-on:click="answer(1); blink(0)">1</button>
-            <button v-bind:style="{background:buttonColor2}" id="b2" v-on:click="answer(2); blink(1)">2</button>
-            <button v-bind:style="{background:buttonColor3}" id="b3" v-on:click="answer(3); blink(2)">3</button>
-			<p>{{ fin }}</p>
-		</div>
+        <footer style = "text-align: center">
+            <p>By: Jordan and Isaac</p>
+            <p>Github: <a href="https://github.com/janders111/creative-project-Vue">janders111</a>
+        </footer>
         
         <script src="app.js"></script>
     </body>
